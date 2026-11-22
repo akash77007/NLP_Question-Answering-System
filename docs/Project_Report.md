@@ -193,19 +193,4 @@ Project 12 has been successfully completed. The extractive QA pipeline provides:
 
 ---
 
-## 8. Viva Voce Frequently Asked Questions
 
-**Q1: What is the difference between Extractive and Abstractive Question Answering?**  
-*Answer:* Extractive QA selects a contiguous substring directly from the source text by predicting start and end token indices, guaranteeing factual accuracy. Abstractive QA generates a novel paraphrased response using a sequence-to-sequence model (like T5 or GPT), which introduces risks of hallucination.
-
-**Q2: What was the main motivation for creating SQuAD 2.0?**  
-*Answer:* SQuAD 1.1 only contained answerable questions, causing models to blindly select whatever text had the highest word overlap even when questions made no sense. SQuAD 2.0 introduced over 50,000 adversarial unanswerable questions to train models to know when evidence is missing.
-
-**Q3: How does the model mathematically identify an unanswerable question?**  
-*Answer:* During fine-tuning, unanswerable questions are trained with start and end indices pointing to the special token `[CLS]` (index 0). At inference time, the model computes the null score $S_{\text{null}} = s_0 + e_0$. If the best passage span score fails to exceed $S_{\text{null}}$ by threshold $\tau$, the model flags the question as unanswerable.
-
-**Q4: How are subword tokens mapped back to the original passage characters?**  
-*Answer:* WordPiece tokenization can split words into fragments (e.g., "playing" into "play" and "##ing"). The fast tokenizer generates an `offset_mapping` array storing the original `(start_char, end_char)` offsets in the raw string. We slice the original string directly using these offsets to preserve whitespace and casing verbatim.
-
-**Q5: Why is `@st.cache_resource` critical for Streamlit deployment?**  
-*Answer:* By default, Streamlit re-executes the entire Python script on every user interaction or button click. Loading BERT’s 110M weights into GPU memory takes 2–3 seconds. `@st.cache_resource` caches the loaded model in memory, allowing subsequent clicks to run inference instantly in ~30 ms.
