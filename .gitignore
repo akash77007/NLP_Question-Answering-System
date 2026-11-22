@@ -1,0 +1,31 @@
+# Python virtual environment
+venv/
+env/
+ENV/
+.env
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Model checkpoints and Hugging Face cache (stored in ~/.cache by default)
+models/
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Streamlit runtime
+.streamlit/

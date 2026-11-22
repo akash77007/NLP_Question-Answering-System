@@ -1,0 +1,283 @@
+{
+  "summary": {
+    "model_name": "deepset/bert-base-cased-squad2",
+    "total_samples": 100,
+    "exact_match": 64.0,
+    "f1_score": 69.23,
+    "has_answer_exact_match": 54.0,
+    "has_answer_f1": 64.46,
+    "has_answer_count": 50,
+    "no_answer_exact_match": 74.0,
+    "no_answer_f1": 74.0,
+    "no_answer_count": 50,
+    "avg_latency_ms": 32.85,
+    "null_threshold": -1.0
+  },
+  "details": [
+    {
+      "question": "What category do all Catholic schools fall into?",
+      "prediction": "No answer found in the provided passage.",
+      "pred_is_impossible": true,
+      "gold_answers": [
+        "No answer"
+      ],
+      "gold_is_impossible": true,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 281.06
+    },
+    {
+      "question": "Among the smallest predatory creatures are the black Caiman and what?",
+      "prediction": "No answer found in the provided passage.",
+      "pred_is_impossible": true,
+      "gold_answers": [
+        "No answer"
+      ],
+      "gold_is_impossible": true,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 33.9
+    },
+    {
+      "question": "Kyoto Protocol dealt with which depletion?",
+      "prediction": "No answer found in the provided passage.",
+      "pred_is_impossible": true,
+      "gold_answers": [
+        "No answer"
+      ],
+      "gold_is_impossible": true,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 33.89
+    },
+    {
+      "question": "Many changes in the vegetation of the amazon rainforest took place since the  Last Glacial Maximum, which was how many years ago?",
+      "prediction": "21,000 years",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "21,000",
+        "21,000",
+        "21,000"
+      ],
+      "gold_is_impossible": false,
+      "em": 0.0,
+      "f1": 0.6667,
+      "latency_ms": 38.13
+    },
+    {
+      "question": "What is the main judicial body of the EU?",
+      "prediction": "Court of Justice of the European Union",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "Court of Justice of the European Union (CJEU)",
+        "the Court of Justice of the European Union (CJEU)",
+        "the Court of Justice of the European Union (CJEU)",
+        "the Court of Justice of the European Union (CJEU)"
+      ],
+      "gold_is_impossible": false,
+      "em": 0.0,
+      "f1": 0.9231,
+      "latency_ms": 36.49
+    },
+    {
+      "question": "How much is the sieve method of gas production used?",
+      "prediction": "No answer found in the provided passage.",
+      "pred_is_impossible": true,
+      "gold_answers": [
+        "major method",
+        "increasingly",
+        "major method",
+        "increasingly"
+      ],
+      "gold_is_impossible": false,
+      "em": 0.0,
+      "f1": 0.0,
+      "latency_ms": 35.57
+    },
+    {
+      "question": "How many Victorians are Buddhist?",
+      "prediction": "168,637",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "168,637",
+        "168,637",
+        "168,637"
+      ],
+      "gold_is_impossible": false,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 34.03
+    },
+    {
+      "question": "What notion causes one to deal with classical variables instead of operators?",
+      "prediction": "No answer found in the provided passage.",
+      "pred_is_impossible": true,
+      "gold_answers": [
+        "No answer"
+      ],
+      "gold_is_impossible": true,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 32.59
+    },
+    {
+      "question": "Who used the church to unify themselves?",
+      "prediction": "the dukes",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "dukes",
+        "the dukes",
+        "dukes"
+      ],
+      "gold_is_impossible": false,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 33.08
+    },
+    {
+      "question": "What bridge did the Germans fail to demolish?",
+      "prediction": "Ludendorff Bridge",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "Ludendorff Bridge",
+        "Ludendorff Bridge",
+        "Ludendorff Bridge"
+      ],
+      "gold_is_impossible": false,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 28.55
+    },
+    {
+      "question": "In the determination of complexity classes, what are two examples of types of Turing machines?",
+      "prediction": "deterministic Turing machines",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "probabilistic Turing machines, non-deterministic Turing machines",
+        "probabilistic Turing machines, non-deterministic Turing machines"
+      ],
+      "gold_is_impossible": false,
+      "em": 0.0,
+      "f1": 0.4444,
+      "latency_ms": 40.67
+    },
+    {
+      "question": "What happened to the rate of deforestation in the Amazon region of Brazil between 2004 and 2014?",
+      "prediction": "declined significantly",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "deforestation has declined",
+        "declined significantly",
+        "declined significantly"
+      ],
+      "gold_is_impossible": false,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 43.04
+    },
+    {
+      "question": "Which country is most involved in nonviolent policy?",
+      "prediction": "Japan",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "No answer"
+      ],
+      "gold_is_impossible": true,
+      "em": 0.0,
+      "f1": 0.0,
+      "latency_ms": 29.35
+    },
+    {
+      "question": "Why is majority rule used?",
+      "prediction": "high risk of a conflict of interest",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "the high risk of a conflict of interest and/or the avoidance of absolute powers",
+        "high risk of a conflict of interest",
+        "high risk of a conflict of interest and/or the avoidance of absolute powers"
+      ],
+      "gold_is_impossible": false,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 26.7
+    },
+    {
+      "question": "When did Francia discover that the Rhine entered had entered their borders?",
+      "prediction": "6th century",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "No answer"
+      ],
+      "gold_is_impossible": true,
+      "em": 0.0,
+      "f1": 0.0,
+      "latency_ms": 27.8
+    },
+    {
+      "question": "The flushing action of what expels pathogens from the eyes?",
+      "prediction": "No answer found in the provided passage.",
+      "pred_is_impossible": true,
+      "gold_answers": [
+        "tears",
+        "tears",
+        "tears"
+      ],
+      "gold_is_impossible": false,
+      "em": 0.0,
+      "f1": 0.0,
+      "latency_ms": 27.64
+    },
+    {
+      "question": "What is the name brand of the video recorder that BSkyB never sold?",
+      "prediction": "No answer found in the provided passage.",
+      "pred_is_impossible": true,
+      "gold_answers": [
+        "No answer"
+      ],
+      "gold_is_impossible": true,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 27.23
+    },
+    {
+      "question": " What was the name of the non-imperialistic policy in China?",
+      "prediction": "No answer found in the provided passage.",
+      "pred_is_impossible": true,
+      "gold_answers": [
+        "No answer"
+      ],
+      "gold_is_impossible": true,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 29.18
+    },
+    {
+      "question": "Can BSkyB veto the presence of channels on their EPG?",
+      "prediction": "BSkyB has no",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "no",
+        "no",
+        "Third-party channels"
+      ],
+      "gold_is_impossible": false,
+      "em": 0.0,
+      "f1": 0.5,
+      "latency_ms": 28.79
+    },
+    {
+      "question": "How is unregistered property held in informal form?",
+      "prediction": "through various associations and other arrangements",
+      "pred_is_impossible": false,
+      "gold_answers": [
+        "through various associations and other arrangements",
+        "through various associations and other arrangements",
+        "through various associations"
+      ],
+      "gold_is_impossible": false,
+      "em": 1.0,
+      "f1": 1.0,
+      "latency_ms": 27.61
+    }
+  ]
+}
