@@ -174,19 +174,3 @@ Performance is benchmarked using standard Stanford SQuAD 2.0 metrics:
 
 ---
 
-## 8. Viva Voce & Presentation Defense Q&A
-
-**Q1: Why did you choose Extractive QA instead of Abstractive QA (e.g., T5 or GPT)?**  
-*Answer:* Extractive QA guarantees zero hallucination because every returned answer is an exact substring extracted from the provided text. For enterprise, legal, or document-grounded tasks, factual fidelity is paramount.
-
-**Q2: What is the primary difference between SQuAD 1.1 and SQuAD 2.0?**  
-*Answer:* SQuAD 1.1 assumed every question had an answer in the passage. SQuAD 2.0 introduced over 50,000 adversarial, unanswerable questions designed to mislead the model, requiring the system to know when *not* to answer.
-
-**Q3: How does BERT handle unanswerable questions mathematically?**  
-*Answer:* The `[CLS]` token at index 0 is trained to represent the null answer. The model computes $S_{\text{null}} = s_0 + e_0$. If the highest scoring span in the passage does not beat $S_{\text{null}}$ by a margin threshold $\tau$, the model flags the question as unanswerable.
-
-**Q4: How do subword WordPiece tokens map back to clean raw text in the UI?**  
-*Answer:* The Hugging Face fast tokenizer produces an `offset_mapping` tensor containing the character start and end indices of each token in the original passage string. We slice the original context string directly using these offsets, preserving original casing, spaces, and punctuation.
-
-**Q5: What is the role of `@st.cache_resource` in your Streamlit application?**  
-*Answer:* Loading BERT’s 110M parameters (~430 MB) into GPU VRAM takes 2–3 seconds. `@st.cache_resource` loads the model once when the web server boots. Subsequent user clicks run in ~15–30 ms directly on the cached GPU model without reloading.
