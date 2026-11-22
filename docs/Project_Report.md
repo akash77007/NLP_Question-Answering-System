@@ -7,6 +7,7 @@
 **Subject:** Natural Language Processing (NLP) Capstone Project  
 **Group Number:** Group 10  
 **GitHub Repository:** [https://github.com/akash77007/NLP_Question-Answering-System](https://github.com/akash77007/NLP_Question-Answering-System)  
+**Project Demo Video:** [https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)  
 
 **Team Members (Group 10):**
 1. Roll No: 2401201113
@@ -174,6 +175,7 @@ The user interface is implemented in Streamlit (`app.py`), following clean Human
 4. **Metrics Dashboard:** Displays Extraction Status, Calibrated Confidence %, Logit Margin ($\Delta$), and Latency in milliseconds.
 5. **Sidebar Sensitivity Slider:** Allows dynamic adjustment of the null threshold $\tau$ during live demonstrations.
 6. **Resource Caching:** Employs `@st.cache_resource` to load the BERT checkpoint into GPU VRAM once, guaranteeing sub-50ms subsequent queries.
+7. **Demonstration Video:** A complete walkthrough of the working application is available at: [https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)
 
 ---
 

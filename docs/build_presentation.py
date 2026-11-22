@@ -75,6 +75,7 @@ def create_presentation():
         "• Roll No: 2401201115        • Roll No: 2401201104\n"
         "• Roll No: 2401201102        • Roll No: 2401201108 (Akash Sharma)\n\n"
         "GitHub Repository: https://github.com/akash77007/NLP_Question-Answering-System\n"
+        "Live Demo Video: https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing\n"
         "Course: BCA (AI & Data Science) | Hardware: NVIDIA RTX 3050 Laptop GPU (CUDA)"
     )
     p4.font.size = Pt(13)
@@ -295,7 +296,8 @@ def create_presentation():
         ("In-Passage Visual Highlighter: Uses custom HTML span badges to visually illuminate the exact extracted answer in the context.", False),
         ("Metrics Dashboard: Displays Extraction Status, Calibrated Confidence %, Logit Margin, and Latency in milliseconds.", False),
         ("Dynamic Sensitivity Slider: Sidebar threshold control to demonstrate strict vs. lenient unanswerable behavior live.", False),
-        ("GPU Memory Caching: Leverages @st.cache_resource to load BERT once into VRAM, enabling instant sub-40ms user interactions.", False)
+        ("GPU Memory Caching: Leverages @st.cache_resource to load BERT once into VRAM, enabling instant sub-40ms user interactions.", False),
+        ("Project Demonstration Video Link: https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing", True)
     ]
     for text, is_bold in points_s9:
         para = tf9.add_paragraph()

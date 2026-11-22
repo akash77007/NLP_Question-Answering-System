@@ -12,6 +12,7 @@
 - **Technology Stack:** PyTorch, BERT-base, Hugging Face, SQuAD 2.0, Streamlit
 - **Hardware Acceleration:** NVIDIA GeForce RTX 3050 Laptop GPU (CUDA 13.x)
 - **GitHub Repository:** [https://github.com/akash77007/NLP_Question-Answering-System](https://github.com/akash77007/NLP_Question-Answering-System)
+- **Live Demo Video:** [Google Drive Demo Video](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)
 - **Team Members (Group 10):**
   - Roll No: 2401201113
   - Roll No: 2401201115
@@ -133,6 +134,7 @@
   - **Model Metrics Display:** Real-time feedback showing Model Confidence %, Logit Margin ($\Delta$), and Latency in milliseconds.
   - **Threshold Slider:** Sidebar control to adjust model sensitivity dynamically.
   - **GPU Memory Caching:** Implements `@st.cache_resource` for zero re-load delay.
+  - **Live Video Demonstration:** [https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)
 
 > **Speaker Note:** *"Now we will demonstrate our working Streamlit web interface live, testing both answerable questions and adversarial trick questions."*
 
