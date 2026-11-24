@@ -1,6 +1,7 @@
 """
 app.py
-Production-Grade Streamlit Web Application for Project 12: Extractive Question Answering System.
+Google Material You (Material Design 3) Themed Streamlit Application.
+Project 12: Extractive Question Answering System.
 Built with PyTorch, Hugging Face Transformers (BERT SQuAD 2.0), and Streamlit.
 Group 10 — BCA (Artificial Intelligence & Data Science) Capstone Project.
 """
@@ -16,209 +17,311 @@ from src.inference import QuestionAnsweringEngine
 # Page Configuration & Metadata
 # ---------------------------------------------------------
 st.set_page_config(
-    page_title="DocuBERT — Extractive Question Answering System",
-    page_icon="🤖",
+    page_title="DocuBERT — Material You Question Answering",
+    page_icon="✨",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # ---------------------------------------------------------
-# Modern Custom CSS Styling
+# Google Material You (Material Design 3) Design System
 # ---------------------------------------------------------
 st.markdown("""
 <style>
-    /* Global Styles */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    /* Google Fonts: Roboto & Google Sans style */
+    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap');
     
-    html, body, [class*="css"] {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    /* Top Banner / Hero */
-    .hero-container {
-        background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #4F46E5 100%);
-        padding: 2.2rem 2.5rem;
-        border-radius: 16px;
-        color: white;
-        margin-bottom: 2rem;
-        box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25);
-    }
-    .hero-title {
-        font-size: 2.4rem;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        margin: 0;
-        color: #FFFFFF;
-    }
-    .hero-subtitle {
-        font-size: 1.1rem;
-        color: #E0E7FF;
-        margin-top: 0.5rem;
-        margin-bottom: 1.2rem;
-        font-weight: 400;
-    }
-    .badge-container {
-        display: flex;
-        gap: 0.6rem;
-        flex-wrap: wrap;
-    }
-    .hero-badge {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        padding: 0.35rem 0.85rem;
-        border-radius: 9999px;
-        font-size: 0.82rem;
-        font-weight: 600;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        color: #FFFFFF;
+    :root {
+        /* Material You M3 Dynamic Blue Palette */
+        --md-sys-color-primary: #0B57D0;
+        --md-sys-color-on-primary: #FFFFFF;
+        --md-sys-color-primary-container: #D3E3FD;
+        --md-sys-color-on-primary-container: #041E49;
+        
+        --md-sys-color-secondary: #00639B;
+        --md-sys-color-secondary-container: #C2E7FF;
+        
+        --md-sys-color-surface: #F8F9FA;
+        --md-sys-color-surface-container-low: #F0F4F9;
+        --md-sys-color-surface-container: #E9EEF6;
+        --md-sys-color-surface-container-high: #E1E7F0;
+        --md-sys-color-surface-container-highest: #D7DFE9;
+        
+        --md-sys-color-on-surface: #1F1F1F;
+        --md-sys-color-on-surface-variant: #444746;
+        --md-sys-color-outline: #747775;
+        --md-sys-color-outline-variant: #C4C7C5;
+        
+        /* M3 Semantic Containers */
+        --md-sys-color-success-container: #C4EED0;
+        --md-sys-color-on-success-container: #072711;
+        --md-sys-color-error-container: #F9DEDC;
+        --md-sys-color-on-error-container: #410E0B;
+        
+        /* M3 Shape Radius */
+        --md-shape-corner-small: 8px;
+        --md-shape-corner-medium: 16px;
+        --md-shape-corner-large: 24px;
+        --md-shape-corner-extra-large: 28px;
+        --md-shape-corner-full: 9999px;
     }
 
-    /* Cards */
-    .feature-card {
-        background: #FFFFFF;
-        border: 1px solid #E5E7EB;
-        border-radius: 14px;
-        padding: 1.5rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1.2rem;
+    /* Base Font Family */
+    html, body, [class*="css"] {
+        font-family: 'Google Sans', 'Roboto', -apple-system, sans-serif !important;
+        color: var(--md-sys-color-on-surface);
     }
     
-    /* Results Display */
-    .answer-card {
-        background: #F0FDF4;
-        border: 1px solid #BBF7D0;
-        border-left: 6px solid #16A34A;
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-top: 1.2rem;
-        margin-bottom: 1.2rem;
+    /* Material You App Hero Surface */
+    .m3-hero-surface {
+        background: var(--md-sys-color-surface-container);
+        border: 1px solid var(--md-sys-color-outline-variant);
+        border-radius: var(--md-shape-corner-extra-large);
+        padding: 2.2rem 2.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
     }
-    .answer-header {
-        font-size: 0.82rem;
+    .m3-hero-headline {
+        font-size: 2.5rem;
         font-weight: 700;
-        color: #15803D;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: -0.02em;
+        color: var(--md-sys-color-on-surface);
+        margin: 0;
         display: flex;
         align-items: center;
+        gap: 0.75rem;
+    }
+    .m3-hero-subhead {
+        font-size: 1.15rem;
+        color: var(--md-sys-color-on-surface-variant);
+        margin-top: 0.5rem;
+        margin-bottom: 1.25rem;
+        font-weight: 400;
+    }
+    
+    /* Material You Tonal Filter Chips */
+    .m3-chip-bar {
+        display: flex;
         gap: 0.5rem;
+        flex-wrap: wrap;
     }
-    .answer-text {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #14532D;
-        margin-top: 0.4rem;
-        margin-bottom: 0.5rem;
-        line-height: 1.25;
+    .m3-tonal-chip {
+        background: var(--md-sys-color-surface-container-high);
+        color: var(--md-sys-color-primary);
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 0.4rem 0.95rem;
+        border-radius: var(--md-shape-corner-full);
+        border: 1px solid var(--md-sys-color-outline-variant);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.2s ease;
     }
-    .answer-meta {
-        font-size: 0.88rem;
-        color: #166534;
-        font-weight: 500;
+    .m3-tonal-chip:hover {
+        background: var(--md-sys-color-primary-container);
+        color: var(--md-sys-color-on-primary-container);
     }
 
-    /* Unanswerable / Rejection Card */
-    .unanswerable-card {
-        background: #FEF2F2;
-        border: 1px solid #FECACA;
-        border-left: 6px solid #DC2626;
-        border-radius: 12px;
+    /* M3 Cards & Containers */
+    .m3-card-elevated {
+        background: var(--md-sys-color-surface-container-low);
+        border: 1px solid var(--md-sys-color-outline-variant);
+        border-radius: var(--md-shape-corner-large);
         padding: 1.5rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    /* M3 Success / Extracted Answer Card */
+    .m3-answer-card {
+        background: var(--md-sys-color-success-container);
+        border: 1px solid #A6E3B9;
+        border-radius: var(--md-shape-corner-extra-large);
+        padding: 1.75rem 2rem;
+        margin-top: 1.2rem;
+        margin-bottom: 1.2rem;
+        box-shadow: 0 4px 12px rgba(20, 108, 46, 0.08);
+    }
+    .m3-answer-tag {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--md-sys-color-on-success-container);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .m3-answer-headline {
+        font-size: 2.1rem;
+        font-weight: 700;
+        color: var(--md-sys-color-on-success-container);
+        margin-top: 0.4rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+    .m3-answer-meta {
+        font-size: 0.9rem;
+        color: #1E4620;
+        font-weight: 500;
+        font-family: 'Roboto Mono', monospace;
+    }
+
+    /* M3 Error / Unanswerable Card */
+    .m3-unanswerable-card {
+        background: var(--md-sys-color-error-container);
+        border: 1px solid #F2B8B5;
+        border-radius: var(--md-shape-corner-extra-large);
+        padding: 1.75rem 2rem;
         margin-top: 1.2rem;
         margin-bottom: 1.2rem;
     }
-    .unanswerable-title {
-        font-size: 1.3rem;
+    .m3-unanswerable-title {
+        font-size: 1.4rem;
         font-weight: 700;
-        color: #991B1B;
+        color: var(--md-sys-color-on-error-container);
         margin: 0;
     }
-    .unanswerable-desc {
-        color: #7F1D1D;
-        margin-top: 0.5rem;
+    .m3-unanswerable-desc {
+        color: #601410;
         font-size: 0.95rem;
-        line-height: 1.5;
+        margin-top: 0.6rem;
+        line-height: 1.6;
     }
 
-    /* In-Passage Highlighting */
-    .highlight-span {
-        background-color: #FEF08A;
-        color: #854D0E;
-        font-weight: 700;
-        padding: 3px 7px;
-        border-radius: 6px;
-        box-shadow: 0 0 0 2px #FACC15;
-    }
-
-    .passage-viewer {
-        background-color: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 12px;
-        padding: 1.5rem;
-        line-height: 1.8;
+    /* M3 In-Passage Highlighting */
+    .m3-passage-viewer {
+        background: var(--md-sys-color-surface-container-low);
+        border: 1px solid var(--md-sys-color-outline-variant);
+        border-radius: var(--md-shape-corner-large);
+        padding: 1.6rem 1.8rem;
+        line-height: 1.85;
         font-size: 1.05rem;
-        color: #1E293B;
+        color: var(--md-sys-color-on-surface);
+    }
+    .m3-highlight-badge {
+        background: #FFD54F;
+        color: #3E2723;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: var(--md-shape-corner-small);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        display: inline;
     }
 
-    /* Metric Pills */
-    .metric-pill-container {
+    /* M3 Metric Badges */
+    .m3-metric-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1rem;
         margin-top: 1rem;
         margin-bottom: 1rem;
     }
-    .metric-pill {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
+    .m3-metric-tile {
+        background: var(--md-sys-color-surface-container);
+        border: 1px solid var(--md-sys-color-outline-variant);
+        border-radius: var(--md-shape-corner-medium);
         padding: 1rem;
         text-align: center;
     }
-    .metric-pill-label {
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: #64748B;
-        text-transform: uppercase;
+    .m3-metric-label {
+        font-size: 0.75rem;
+        font-weight: 700;
         letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--md-sys-color-on-surface-variant);
     }
-    .metric-pill-val {
-        font-size: 1.45rem;
-        font-weight: 800;
-        color: #0F172A;
-        margin-top: 0.2rem;
+    .m3-metric-num {
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: var(--md-sys-color-primary);
+        margin-top: 0.25rem;
     }
 
-    /* Team Card */
-    .team-badge {
-        background: #EEF2FF;
-        color: #3730A3;
-        border: 1px solid #C7D2FE;
-        padding: 0.5rem 0.9rem;
-        border-radius: 8px;
+    /* Material You Form Controls Override */
+    div[data-baseweb="select"] > div {
+        border-radius: var(--md-shape-corner-medium) !important;
+        background-color: var(--md-sys-color-surface-container-low) !important;
+        border-color: var(--md-sys-color-outline-variant) !important;
+    }
+    .stTextArea textarea {
+        border-radius: var(--md-shape-corner-medium) !important;
+        background-color: var(--md-sys-color-surface-container-low) !important;
+        border: 1px solid var(--md-sys-color-outline-variant) !important;
+        font-size: 1rem !important;
+    }
+    .stTextInput input {
+        border-radius: var(--md-shape-corner-medium) !important;
+        background-color: var(--md-sys-color-surface-container-low) !important;
+        border: 1px solid var(--md-sys-color-outline-variant) !important;
+        font-size: 1rem !important;
+    }
+    
+    /* M3 Filled Buttons */
+    div.stButton > button[kind="primary"] {
+        border-radius: var(--md-shape-corner-full) !important;
+        background: var(--md-sys-color-primary) !important;
+        color: var(--md-sys-color-on-primary) !important;
+        font-weight: 600 !important;
+        font-size: 0.95rem !important;
+        padding: 0.65rem 1.8rem !important;
+        border: none !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.15) !important;
+        transition: all 0.2s ease !important;
+    }
+    div.stButton > button[kind="primary"]:hover {
+        background: #0842A0 !important;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+    }
+    div.stButton > button[kind="secondary"] {
+        border-radius: var(--md-shape-corner-full) !important;
+        background: var(--md-sys-color-surface-container-high) !important;
+        color: var(--md-sys-color-primary) !important;
+        border: 1px solid var(--md-sys-color-outline-variant) !important;
+        font-weight: 500 !important;
+    }
+    
+    /* M3 Tab Indicator */
+    button[data-baseweb="tab"] {
+        border-radius: var(--md-shape-corner-medium) var(--md-shape-corner-medium) 0 0 !important;
+        font-weight: 600 !important;
+        color: var(--md-sys-color-on-surface-variant) !important;
+    }
+    button[data-baseweb="tab"][aria-selected="true"] {
+        color: var(--md-sys-color-primary) !important;
+    }
+
+    /* Team Chip Pill */
+    .m3-team-pill {
+        background: var(--md-sys-color-primary-container);
+        color: var(--md-sys-color-on-primary-container);
+        padding: 0.6rem 1rem;
+        border-radius: var(--md-shape-corner-medium);
         font-weight: 600;
         font-size: 0.92rem;
         display: inline-block;
-        margin: 0.25rem;
+        margin: 0.3rem;
+        border: 1px solid #A8C7FA;
     }
 </style>
 """, unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------
-# Cached Model Loader
+# Cached Model Loader (Loads once into GPU VRAM)
 # ---------------------------------------------------------
-@st.cache_resource(show_spinner="⚡ Initializing BERT QA Engine on GPU...")
+@st.cache_resource(show_spinner="✨ Initializing BERT QA Engine on GPU...")
 def load_qa_engine():
     """Initializes and caches the BERT model once in VRAM."""
     return QuestionAnsweringEngine(model_name="deepset/bert-base-cased-squad2")
 
 
 # ---------------------------------------------------------
-# Curated Presets
+# Material You Curated Presets
 # ---------------------------------------------------------
 PRESETS = {
-    "-- Custom Input (Enter your own context & question) --": {
+    "-- Custom Query (Type your own passage & question) --": {
         "context": "",
         "question": ""
     },
@@ -273,25 +376,29 @@ PRESETS = {
 
 def main():
     # -----------------------------------------------------
-    # Sidebar: Model Diagnostics & Controls
+    # Sidebar: Material Design Navigation & Controls
     # -----------------------------------------------------
-    st.sidebar.image("https://huggingface.co/front/assets/huggingface_logo-noborder.svg", width=50)
-    st.sidebar.title("System Controls")
+    st.sidebar.markdown("""
+    <div style='display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem;'>
+        <span style='font-size: 1.8rem;'>✨</span>
+        <span style='font-size: 1.25rem; font-weight: 700; color: #1F1F1F;'>System Settings</span>
+    </div>
+    """, unsafe_allow_html=True)
     
-    # Hardware Status
+    # Hardware Status Tile
     has_cuda = torch.cuda.is_available()
     device_label = "NVIDIA CUDA GPU" if has_cuda else "Host CPU"
-    device_name = torch.cuda.get_device_name(0) if has_cuda else "CPU Only"
+    device_name = torch.cuda.get_device_name(0) if has_cuda else "CPU Compute Only"
     
     st.sidebar.markdown(f"""
-    <div style='background: {'#ECFDF5' if has_cuda else '#FEF3C7'}; border: 1px solid {'#A7F3D0' if has_cuda else '#FDE68A'}; border-radius: 8px; padding: 0.75rem; margin-bottom: 1rem;'>
-        <div style='font-size: 0.75rem; font-weight: 700; color: {'#065F46' if has_cuda else '#92400E'}; text-transform: uppercase;'>Acceleration Active</div>
-        <div style='font-size: 0.95rem; font-weight: 700; color: {'#047857' if has_cuda else '#B45309'};'>{device_label}</div>
-        <div style='font-size: 0.8rem; color: #4B5563; margin-top: 0.2rem;'>{device_name}</div>
+    <div style='background: {'#C4EED0' if has_cuda else '#FEF3C7'}; border: 1px solid {'#A6E3B9' if has_cuda else '#FDE68A'}; border-radius: 16px; padding: 0.85rem 1rem; margin-bottom: 1.2rem;'>
+        <div style='font-size: 0.72rem; font-weight: 700; color: {'#072711' if has_cuda else '#92400E'}; text-transform: uppercase; letter-spacing: 0.05em;'>Hardware Acceleration</div>
+        <div style='font-size: 0.95rem; font-weight: 700; color: {'#146C2E' if has_cuda else '#B45309'}; margin-top: 0.15rem;'>{device_label}</div>
+        <div style='font-size: 0.8rem; color: #444746; margin-top: 0.2rem;'>{device_name}</div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.sidebar.subheader("⚙️ Model Hyperparameters")
+    st.sidebar.subheader("🎛️ Model Parameters")
     null_threshold = st.sidebar.slider(
         "Null Answer Threshold (τ)",
         min_value=-4.0,
@@ -299,8 +406,8 @@ def main():
         value=-1.0,
         step=0.25,
         help=(
-            "Margin threshold: (Best_Span_Score - Null_Score). "
-            "Higher = Stricter model (avoids false positives, rejects questionable evidence). "
+            "Decision margin: (Best_Span_Score - Null_Score). "
+            "Higher = Stricter model (rejects missing evidence, avoids false positives). "
             "Lower = More willing to extract candidate spans."
         )
     )
@@ -315,64 +422,68 @@ def main():
     )
 
     st.sidebar.markdown("---")
-    st.sidebar.subheader("🔗 Project Links")
+    st.sidebar.subheader("📌 Project Metadata")
     st.sidebar.markdown("""
-    - [GitHub Repository](https://github.com/akash77007/NLP_Question-Answering-System)
-    - [Demo Video (Drive)](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)
     - **Course**: BCA (AI & Data Science)
     - **Group**: Group 10
+    - **Project**: 12 — Question Answering
+    - [GitHub Repository](https://github.com/akash77007/NLP_Question-Answering-System)
+    - [Project Demo Video](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)
     """)
 
     # -----------------------------------------------------
-    # Top Hero Header
+    # Material You App Hero Surface
     # -----------------------------------------------------
     st.markdown("""
-    <div class="hero-container">
-        <h1 class="hero-title">DocuBERT: Extractive Question Answering</h1>
-        <div class="hero-subtitle">
-            Context-Grounded Reading Comprehension with BERT-base fine-tuned on Stanford SQuAD 2.0
+    <div class="m3-hero-surface">
+        <h1 class="m3-hero-headline">
+            <span>✨ DocuBERT</span>
+        </h1>
+        <div class="m3-hero-subhead">
+            Context-Grounded Extractive Question Answering powered by BERT-base and Stanford SQuAD 2.0
         </div>
-        <div class="badge-container">
-            <span class="hero-badge">⚡ Pure Extractive (Zero Hallucination)</span>
-            <span class="hero-badge">🛡️ SQuAD 2.0 Adversarial Rejection</span>
-            <span class="hero-badge">🚀 RTX 3050 GPU Accelerated</span>
-            <span class="hero-badge">🎓 Group 10 Capstone</span>
+        <div class="m3-chip-bar">
+            <span class="m3-tonal-chip">🎯 Pure Extractive (Zero Hallucination)</span>
+            <span class="m3-tonal-chip">🛡️ SQuAD 2.0 Adversarial Rejection</span>
+            <span class="m3-tonal-chip">⚡ RTX 3050 GPU Accelerated</span>
+            <span class="m3-tonal-chip">🎓 Group 10 Capstone</span>
+            <span class="m3-tonal-chip">🎨 Material Design 3</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
     # -----------------------------------------------------
-    # Main Navigation Tabs
+    # Main Navigation Tabs (Material You Style)
     # -----------------------------------------------------
     tab_studio, tab_metrics, tab_eda, tab_team = st.tabs([
-        "🔍 Interactive Q&A Studio",
-        "📊 Benchmark & Architecture",
-        "📈 Dataset & EDA Analytics",
-        "👥 Group 10 & Submission Info"
+        "🔍 Q&A Studio",
+        "📊 Architecture & Evaluation",
+        "📈 SQuAD 2.0 Dataset & EDA",
+        "👥 Group 10 Team & Submission"
     ])
 
-    # Load Model Engine
+    # Initialize Backend Engine
     qa_engine = load_qa_engine()
 
     # =====================================================
     # TAB 1: INTERACTIVE Q&A STUDIO
     # =====================================================
     with tab_studio:
-        # Preset Selector Bar
+        # Preset Quick-Bar
         col_preset, col_reset = st.columns([4, 1])
         with col_preset:
             selected_preset = st.selectbox(
-                "📋 Quick-Load a Sample Scenario (or type your own text below):",
+                "📋 Choose a Sample Scenario (or enter custom text below):",
                 options=list(PRESETS.keys())
             )
         with col_reset:
             st.write("")
             st.write("")
-            reset_clicked = st.button("🔄 Clear / Reset", use_container_width=True)
+            reset_clicked = st.button("🔄 Reset Inputs", use_container_width=True)
 
         preset_context = ""
         preset_question = ""
-        if not reset_clicked and selected_preset != "-- Custom Input (Enter your own context & question) --":
+        if not reset_clicked and selected_preset != "-- Custom Query (Type your own passage & question) --":
             preset_context = PRESETS[selected_preset]["context"]
             preset_question = PRESETS[selected_preset]["question"]
 
@@ -383,40 +494,42 @@ def main():
             context_text = st.text_area(
                 "Provide the source document from which the answer will be extracted:",
                 value=preset_context,
-                height=220,
-                placeholder="Paste paragraph, technical manual, legal clause, or article text here..."
+                height=230,
+                placeholder="Paste paragraph, report, technical manual, or legal text here..."
             )
             
-            # Context Counter Stats
+            # Live Context Statistics
             if context_text.strip():
                 c_words = len(context_text.split())
                 c_chars = len(context_text)
-                st.caption(f"📊 Passage Stats: **{c_words} words** | **{c_chars} characters** | ~{int(c_words * 1.3)} BERT tokens")
+                st.caption(f"📝 Passage Length: **{c_words} words** | **{c_chars} characters** | ~{int(c_words * 1.3)} BERT tokens")
 
         with col_input_right:
             st.markdown("#### 2. Natural Language Question")
             question_text = st.text_input(
                 "Enter your question regarding the provided passage:",
                 value=preset_question,
-                placeholder="e.g., What was the name of the lunar module?"
+                placeholder="e.g., What was the name of the lunar module that landed on the Moon?"
             )
             
             st.markdown("<br>", unsafe_allow_html=True)
-            run_btn = st.button("🚀 Extract Answer from Passage", type="primary", use_container_width=True)
+            run_btn = st.button("🚀 Extract Answer from Document", type="primary", use_container_width=True)
 
-            st.info(
-                "💡 **How it works:** BERT attends to both Question and Passage simultaneously. "
-                "If no answer is factually supported by the text, SQuAD 2.0 null-scoring explicitly alerts you."
-            )
+            st.markdown("""
+            <div style='background: var(--md-sys-color-surface-container-low); border: 1px solid var(--md-sys-color-outline-variant); border-radius: 14px; padding: 0.85rem 1rem; margin-top: 0.8rem; font-size: 0.85rem; color: #444746;'>
+                💡 <b>How it works:</b> BERT attends to both the Question and Document simultaneously. 
+                If the question cannot be answered from the text, SQuAD 2.0 null-scoring alerts you immediately.
+            </div>
+            """, unsafe_allow_html=True)
 
         # -------------------------------------------------
-        # Extraction & Output Display
+        # Extraction Results
         # -------------------------------------------------
         if run_btn:
             if not context_text.strip() or not question_text.strip():
                 st.warning("⚠️ Please provide both a reference passage and a question before submitting.")
             else:
-                with st.spinner("Processing token logits with BERT Transformer layers..."):
+                with st.spinner("Analyzing text with BERT Transformer layers..."):
                     res = qa_engine.predict(
                         question=question_text,
                         context=context_text,
@@ -425,33 +538,32 @@ def main():
                     )
 
                 st.markdown("---")
-                st.markdown("### 🎯 Extraction Results & Analysis")
+                st.markdown("### 🎯 Extraction Results & Grounding")
 
-                # Metric Cards Bar
+                # Material You Metric Tiles
                 m_col1, m_col2, m_col3, m_col4 = st.columns(4)
                 with m_col1:
-                    status_badge = "❌ Unanswerable" if res["is_impossible"] else "✅ Answer Extracted"
+                    status_badge = "❌ Unanswerable" if res["is_impossible"] else "✅ Answer Found"
                     st.metric("Status", status_badge)
                 with m_col2:
                     st.metric("Confidence Score", f"{res['confidence']:.1%}")
                 with m_col3:
-                    st.metric("Logit Difference (Δ)", f"{res['score']:.2f}")
+                    st.metric("Logit Margin (Δ)", f"{res['score']:.2f}")
                 with m_col4:
                     st.metric("Inference Latency", f"{res['latency_ms']} ms")
 
-                # Confidence Bar
                 st.progress(res['confidence'])
 
-                # Display Results
+                # Display Result Card
                 if res["is_impossible"]:
                     st.markdown(f"""
-                    <div class="unanswerable-card">
-                        <h3 class="unanswerable-title">🚫 No Answer Found in Passage</h3>
-                        <div class="unanswerable-desc">
+                    <div class="m3-unanswerable-card">
+                        <h3 class="m3-unanswerable-title">🚫 No Answer Found in Passage</h3>
+                        <div class="m3-unanswerable-desc">
                             The model analyzed the passage and determined with <b>{res['confidence']:.1%} certainty</b> 
-                            that the text does not contain factual evidence to answer this question.
+                            that the supplied text does not contain factual evidence to answer this question.
                             <br><br>
-                            <i>(SQuAD 2.0 adversarial null thresholding rejected this query because the candidate span score 
+                            <i>(SQuAD 2.0 adversarial null thresholding rejected this query because candidate span score 
                             failed to exceed the [CLS] null score by margin τ = {null_threshold}).</i>
                         </div>
                     </div>
@@ -462,26 +574,26 @@ def main():
                     end_pos = res["end_char"]
 
                     st.markdown(f"""
-                    <div class="answer-card">
-                        <div class="answer-header">
+                    <div class="m3-answer-card">
+                        <div class="m3-answer-tag">
                             <span>🎯 Extracted Text Span</span>
                         </div>
-                        <div class="answer-text">"{ans}"</div>
-                        <div class="answer-meta">
-                            Exact Span Indices: Characters [{start_pos} : {end_pos}] in source passage
+                        <div class="m3-answer-headline">"{ans}"</div>
+                        <div class="m3-answer-meta">
+                            Verbatim Span Indices: Characters [{start_pos} : {end_pos}] in source text
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
 
-                    # In-Passage Highlighting
-                    st.markdown("#### 📖 In-Passage Grounding (Visual Highlighting)")
+                    # Material You In-Passage Highlighting
+                    st.markdown("#### 📖 In-Passage Visual Highlighting")
                     before = context_text[:start_pos]
                     target = context_text[start_pos:end_pos]
                     after = context_text[end_pos:]
 
                     highlighted_html = (
-                        f"<div class='passage-viewer'>"
-                        f"{before}<span class='highlight-span'>{target}</span>{after}"
+                        f"<div class='m3-passage-viewer'>"
+                        f"{before}<span class='m3-highlight-badge'>{target}</span>{after}"
                         f"</div>"
                     )
                     st.markdown(highlighted_html, unsafe_allow_html=True)
@@ -507,16 +619,15 @@ def main():
                         })
 
     # =====================================================
-    # TAB 2: BENCHMARK & ARCHITECTURE
+    # TAB 2: ARCHITECTURE & BENCHMARK
     # =====================================================
     with tab_metrics:
-        st.markdown("### 📊 Empirical Performance on SQuAD 2.0")
+        st.markdown("### 📊 Empirical Performance on Stanford SQuAD 2.0")
         st.markdown(
             "Our model was benchmarked on a balanced split of the official **Stanford SQuAD 2.0** validation dataset. "
             "Here are the empirical results evaluated on the NVIDIA RTX 3050 GPU:"
         )
 
-        # Load eval_results.json if available
         eval_path = os.path.join("data", "eval_results.json")
         if not os.path.exists(eval_path):
             eval_path = os.path.join("..", "data", "eval_results.json")
@@ -612,7 +723,7 @@ def main():
             """)
 
     # =====================================================
-    # TAB 4: GROUP 10 & SUBMISSION INFO
+    # TAB 4: GROUP 10 & SUBMISSION
     # =====================================================
     with tab_team:
         st.markdown("### 🎓 Capstone Project Details")
@@ -636,7 +747,7 @@ def main():
         cols = st.columns(3)
         for i, member in enumerate(members):
             with cols[i % 3]:
-                st.markdown(f"<div class='team-badge'>👤 Roll No: {member}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='m3-team-pill'>👤 Roll No: {member}</div>", unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("#### 🔗 Deliverable Links:")
@@ -649,8 +760,8 @@ def main():
     # Footer
     st.markdown("<br><hr>", unsafe_allow_html=True)
     st.markdown(
-        "<div style='text-align: center; color: #64748B; font-size: 0.85rem;'>"
-        "NLP Capstone Project 12 — Extractive Question Answering System | Group 10 | Powered by PyTorch & BERT"
+        "<div style='text-align: center; color: var(--md-sys-color-on-surface-variant); font-size: 0.85rem;'>"
+        "NLP Capstone Project 12 — Extractive Question Answering System | Group 10 | Material Design 3"
         "</div>",
         unsafe_allow_html=True
     )
