@@ -429,9 +429,13 @@ def create_presentation():
         para.font.color.rgb = DARK_GRAY
         para.space_after = Pt(5)
 
-    # Right: Architecture Diagram Placeholder
-    add_placeholder_box(s7, Inches(7.5), Inches(1.55), Inches(5.0), Inches(5.3), 
-                        "Paste BERT Model Architecture Diagram Here\n([CLS] + Question + [SEP] + Passage ➔ BERT ➔ Logits)")
+    # Right: Architecture Diagram
+    arch_img = os.path.join("docs", "screenshots", "bert_qa_architecture.png")
+    if os.path.exists(arch_img):
+        s7.shapes.add_picture(arch_img, Inches(7.3), Inches(1.85), width=Inches(5.2))
+    else:
+        add_placeholder_box(s7, Inches(7.5), Inches(1.55), Inches(5.0), Inches(5.3), 
+                            "Paste BERT Model Architecture Diagram Here\n([CLS] + Question + [SEP] + Passage ➔ BERT ➔ Logits)")
 
     # =============================================================
     # SLIDE 8: Performance Evaluation & Results (Native Styled Table)
@@ -540,9 +544,13 @@ def create_presentation():
         para.font.color.rgb = DARK_GRAY
         para.space_after = Pt(5)
 
-    # Right: Streamlit Screenshot Placeholder
-    add_placeholder_box(s9, Inches(6.8), Inches(1.55), Inches(5.7), Inches(5.3),
-                        "Paste Streamlit Web GUI Demo Screenshot Here\n(Showing passage input, question, highlighted answer, and confidence metrics)")
+    # Right: Streamlit Screenshot
+    gui_img = os.path.join("docs", "screenshots", "02_answer_extracted_apollo.png")
+    if os.path.exists(gui_img):
+        s9.shapes.add_picture(gui_img, Inches(6.8), Inches(1.85), width=Inches(5.7))
+    else:
+        add_placeholder_box(s9, Inches(6.8), Inches(1.55), Inches(5.7), Inches(5.3),
+                            "Paste Streamlit Web GUI Demo Screenshot Here\n(Showing passage input, question, highlighted answer, and confidence metrics)")
 
     # =============================================================
     # SLIDE 10: Conclusion & Future Scope

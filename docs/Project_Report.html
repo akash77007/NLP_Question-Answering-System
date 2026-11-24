@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project 12: Extractive Question Answering System - Academic Report</title>
+    <!-- MathJax for rendering publication-grade KaTeX/LaTeX formulas -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [['$$', '$$']]
+        },
+        svg: { fontCache: 'global' }
+    };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 20mm 18mm 20mm 18mm;
+            @bottom-right {
+                content: counter(page);
+                font-family: 'Segoe UI', system-ui, sans-serif;
+                font-size: 9pt;
+                color: #64748B;
+            }
+            @bottom-left {
+                content: "Project 12: Extractive Question Answering System (Group 10)";
+                font-family: 'Segoe UI', system-ui, sans-serif;
+                font-size: 9pt;
+                color: #64748B;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.6;
+            color: #1E293B;
+            background: #FFFFFF;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 22pt;
+            font-weight: 800;
+            color: #0F172A;
+            line-height: 1.25;
+            margin-top: 0;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 13pt;
+            color: #0B57D0;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .metadata-box {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-left: 4px solid #0B57D0;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 25px;
+            font-size: 9.5pt;
+        }
+
+        .metadata-box p {
+            margin: 4px 0;
+        }
+
+        h2 {
+            font-size: 15pt;
+            font-weight: 700;
+            color: #0F172A;
+            border-bottom: 1.5px solid #E2E8F0;
+            padding-bottom: 6px;
+            margin-top: 26px;
+            margin-bottom: 12px;
+            break-after: avoid;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: 600;
+            color: #1E3A8A;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            break-after: avoid;
+        }
+
+        h4 {
+            font-size: 10.5pt;
+            font-weight: 600;
+            color: #334155;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            break-after: avoid;
+        }
+
+        p, li {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        ul, ol {
+            margin-top: 6px;
+            margin-bottom: 12px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 9.5pt;
+            break-inside: avoid;
+        }
+
+        th {
+            background: #0F172A;
+            color: #FFFFFF;
+            font-weight: 600;
+            text-align: left;
+            padding: 8px 12px;
+            border: 1px solid #0F172A;
+        }
+
+        td {
+            padding: 8px 12px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+        }
+
+        tr:nth-child(even) td {
+            background: #F8FAFC;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 9pt;
+            background: #F1F5F9;
+            color: #0F172A;
+            padding: 2px 5px;
+            border-radius: 4px;
+            border: 1px solid #E2E8F0;
+        }
+
+        pre {
+            background: #0F172A;
+            color: #F8FAFC;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 8.5pt;
+            overflow-x: auto;
+            break-inside: avoid;
+        }
+
+        pre code {
+            background: transparent;
+            color: #F8FAFC;
+            border: none;
+            padding: 0;
+        }
+
+        .math-block {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 12px 0;
+            text-align: center;
+            break-inside: avoid;
+            font-size: 10pt;
+        }
+
+        .figure-container {
+            margin: 20px auto;
+            text-align: center;
+            break-inside: avoid;
+        }
+
+        .figure-container img, img {
+            max-width: 96%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #CBD5E1;
+            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+            margin: 8px auto;
+            display: block;
+        }
+
+        .figure-caption {
+            font-size: 9pt;
+            color: #475569;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        blockquote {
+            border-left: 3.5px solid #0B57D0;
+            margin: 14px 0;
+            padding: 6px 16px;
+            background: #F1F5F9;
+            color: #334155;
+            font-style: italic;
+            border-radius: 0 6px 6px 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #E2E8F0;
+            margin: 24px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 8pt;
+            font-weight: 600;
+            border-radius: 12px;
+            background: #E0E7FF;
+            color: #3730A3;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Capstone Project Report</h1>
+<h2>Project 12: Extractive Question Answering System Using BERT and SQuAD 2.0</h2>
+<p><strong>Course:</strong> Bachelor of Computer Applications (BCA)<br />
+<strong>Specialisation:</strong> Artificial Intelligence and Data Science<br />
+<strong>Subject:</strong> Natural Language Processing (NLP) Capstone Project<br />
+<strong>Group Number:</strong> Group 10<br />
+<strong>GitHub Repository:</strong> <a href="https://github.com/akash77007/NLP_Question-Answering-System">https://github.com/akash77007/NLP_Question-Answering-System</a><br />
+<strong>Project Demo Video:</strong> <a href="https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing">https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing</a>  </p>
+<p><strong>Team Members (Group 10):</strong><br />
+1. Roll No: 2401201113<br />
+2. Roll No: 2401201115<br />
+3. Roll No: 2401201102<br />
+4. Roll No: 2401201213<br />
+5. Roll No: 2401201104<br />
+6. Roll No: 2401201108 (Akash Sharma - Project Lead)</p>
+<hr />
+<h2>Abstract</h2>
+<p>Extractive Question Answering (QA) is an essential branch of Natural Language Processing (NLP) in which an automated model reads an unstructured passage of text and extracts the precise sub-sequence (text span) that answers a user's question. While modern generative Large Language Models (LLMs) synthesize fluent answers, they suffer from factual hallucination, unverified assertions, and high computational cost. In mission-critical domains—such as legal contract discovery, clinical healthcare, and regulatory financial compliance—answers must be strictly grounded in provided reference text with verifiable provenance.</p>
+<p>This project designs, evaluates, and deploys an end-to-end, production-grade Extractive Question Answering System based on the Bidirectional Encoder Representations from Transformers (BERT) architecture fine-tuned on the Stanford Question Answering Dataset 2.0 (SQuAD 2.0). The system addresses key reading comprehension challenges by incorporating:<br />
+1. Pure extractive span extraction predicting start and end token logits.<br />
+2. Adversarial unanswerable question detection using [CLS] null-thresholding, enabling the model to explicitly reject trick questions lacking supporting evidence.<br />
+3. Lossless character offset mapping that recovers verbatim passage text with original casing, punctuation, and whitespace intact.<br />
+4. An interactive, GPU-accelerated web graphical user interface (GUI) developed in Streamlit featuring real-time in-passage HTML visual highlighting, confidence scoring, and sensitivity threshold sliders.</p>
+<p>Benchmarked on a balanced split of the SQuAD 2.0 validation dataset using an NVIDIA GeForce RTX 3050 Laptop GPU (4 GB VRAM), the system achieves an overall Exact Match (EM) score of 64.00%, an overall token-level F1 score of 69.23%, an unanswerable question accuracy of 74.00%, and an average inference latency of 32.85 milliseconds per query (~30 queries per second). The resulting application fully satisfies all college capstone requirements, providing an auditable, high-performance question answering tool with zero risk of generative hallucination.</p>
+<hr />
+<h2>1. Introduction and Objectives</h2>
+<h3>1.1 Problem Statement</h3>
+<p>In information-dense domains such as legal discovery, clinical healthcare, and enterprise compliance, users require precise answers grounded solely in provided source documents. Generative models often generate plausible-sounding falsehoods (hallucinations) when confronted with questions outside their training data or questions whose answers are absent from the context. </p>
+<p>Project 12 mandates the development of an <strong>extractive</strong> Question Answering system that:<br />
+1. Operates on a user-supplied context passage and a natural language question.<br />
+2. Identifies and extracts the exact answer substring directly from the passage.<br />
+3. Detects when a question is unanswerable from the passage and explicitly notifies the user.<br />
+4. Provides a demonstrable web graphical user interface (GUI).</p>
+<h3>1.2 Key Objectives</h3>
+<ul>
+<li><strong>Strict Factual Grounding:</strong> Eliminate hallucination by restricting answers to contiguous passage spans.</li>
+<li><strong>Adversarial Robustness:</strong> Incorporate SQuAD 2.0 null-score rejection to reliably handle questions where evidence is missing.</li>
+<li><strong>Hardware-Accelerated Inference:</strong> Leverage PyTorch and CUDA to run real-time inference on consumer GPU hardware (NVIDIA RTX 3050, 4 GB VRAM).</li>
+<li><strong>Interactive Visualization:</strong> Build a Streamlit application featuring live in-passage highlighting, confidence metrics, and sensitivity controls.</li>
+</ul>
+<hr />
+<h2>2. Dataset Description: Stanford SQuAD 2.0</h2>
+<h3>2.1 Overview</h3>
+<p>The Stanford Question Answering Dataset (SQuAD) is the industry-standard benchmark for reading comprehension. While SQuAD 1.1 contained over 100,000 answerable question-passage pairs, it suffered from a major flaw: models were rewarded for guessing spans even on nonsensical questions.</p>
+<p>SQuAD 2.0 addresses this vulnerability by combining the 100,000 answerable questions from SQuAD 1.1 with over <strong>50,000 unanswerable questions</strong> written adversarially by human crowdworkers. These unanswerable questions share key nouns and verbs with the passage to mislead naive matching algorithms, forcing the model to verify semantic entails before extracting an answer.</p>
+<h3>2.2 Dataset Schema</h3>
+<p>Each entry in the SQuAD 2.0 tabular split consists of:<br />
+- <code>title</code>: The Wikipedia article from which the context was sourced.<br />
+- <code>context</code>: The reference passage text.<br />
+- <code>question</code>: The natural language query.<br />
+- <code>ids</code>: Unique hexadecimal identifier.<br />
+- <code>answers</code>: Ground-truth human reference answers.<br />
+- <code>answer_start</code>: Character index where each reference answer begins in the context.<br />
+- <code>is_impossible</code>: Boolean flag (<code>False</code> = Answerable, <code>True</code> = Unanswerable).</p>
+<hr />
+<h2>3. Exploratory Data Analysis (EDA)</h2>
+<p>Exploratory analysis was conducted using Pandas and Matplotlib across the 11,873 samples of the SQuAD 2.0 validation split. The findings are summarized below:</p>
+<h3>3.1 Class Balance</h3>
+<ul>
+<li><strong>Answerable Questions (<code>is_impossible == False</code>):</strong> 5,928 samples (49.93%)</li>
+<li><strong>Unanswerable Questions (<code>is_impossible == True</code>):</strong> 5,945 samples (50.07%)</li>
+<li><em>Insight:</em> The validation split is precisely balanced 50/50. A baseline model that uniformly guesses "unanswerable" would achieve 50% accuracy, making dual evaluation on both Answerable and Unanswerable subsets mandatory.</li>
+</ul>
+<h3>3.2 Sequence Length Distributions</h3>
+<ul>
+<li><strong>Passage Length (Words):</strong></li>
+<li>Median: 120 words</li>
+<li>90th Percentile: 194 words</li>
+<li>95th Percentile: 220 words</li>
+<li>Maximum: 629 words</li>
+<li><strong>Question Length (Words):</strong></li>
+<li>Median: 10 words</li>
+<li>95th Percentile: 15 words</li>
+<li><em>Architectural Implication:</em> With an average token-to-word ratio of approximately 1.3 for WordPiece subwords, a passage of 220 words translates to ~286 tokens. Adding a 15-word question (~20 tokens) and special tokens (<code>[CLS]</code>, <code>[SEP]</code>, <code>[SEP]</code>) yields ~309 tokens, which fits comfortably within BERT's standard <code>max_seq_length = 384</code> window without truncating critical context.</li>
+</ul>
+<h3>3.3 Linguistic Question Typology</h3>
+<p>Analysis of the leading interrogative words revealed the following distribution:<br />
+1. <strong>What:</strong> 58.2% (Object, concept, definition)<br />
+2. <strong>Who:</strong> 14.1% (Person, organization, entity)<br />
+3. <strong>How:</strong> 10.3% (Manner, process, quantity)<br />
+4. <strong>When:</strong> 9.1% (Date, temporal events)<br />
+5. <strong>Where:</strong> 5.4% (Location, place)<br />
+6. <strong>Why / Which:</strong> 2.9% (Causal &amp; selection)</p>
+<p><img alt="Figure 1: SQuAD 2.0 Exploratory Data Analysis Dashboard" src="../data/squad_eda_plots.png" /><br />
+<em>Figure 1: Exploratory Data Analysis dashboard for SQuAD 2.0 validation split (n=11,873). Panel A shows the 50/50 class balance; Panel B plots context word counts with the 95th percentile cutoff at 220 words; Panel C displays question length distributions; Panel D highlights interrogative starter frequencies.</em></p>
+<h3>3.4 Text Preprocessing &amp; Offset Mapping</h3>
+<p>Unlike traditional NLP systems where text is normalized by removing stopwords, stemming, and stripping punctuation, BERT operates on full grammatical syntax:<br />
+- Stopwords provide necessary relational signals for bidirectional attention heads.<br />
+- Punctuation marks establish clause boundaries.<br />
+- Casing is critical to disambiguate proper nouns and entities.</p>
+<p>Input sequences are tokenized using WordPiece with the joint formatting:</p>
+<div class="math-block">$$\displaystyle \mathbf{X} = [\text{CLS}], q_1, \dots, q_m, [\text{SEP}], c_1, \dots, c_n, [\text{SEP}]$$</div>
+
+<p>The fast Rust tokenizer computes an <code>offset_mapping</code> tensor containing the start and end character offsets <span class="math-inline">$(c_{\text{start}}, c_{\text{end}})$</span> of each token within the raw passage string, enabling direct verbatim slicing without detokenization artifacts.</p>
+<hr />
+<h2>4. System Architecture and Methodology</h2>
+<h3>4.1 Model Selection</h3>
+<p>The system employs <strong><code>deepset/bert-base-cased-squad2</code></strong>, a 12-layer, 768-hidden dimension BERT-base Transformer model (110 million parameters) fine-tuned specifically on SQuAD 2.0. The cased model preserves capitalization, which is essential for identifying named entities.</p>
+<p><img alt="Figure 2: BERT Extractive Question Answering Architecture" src="screenshots/bert_qa_architecture.png" /><br />
+<em>Figure 2: End-to-end architecture of the BERT Extractive Question Answering Engine. The model encodes joint Question-Passage sequences via 12 Transformer layers, projecting output contextual embeddings <span class="math-inline">$T_i$</span> into start logits <span class="math-inline">$s_i$</span> and end logits <span class="math-inline">$e_j$</span>, with [CLS] representation <span class="math-inline">$T_0$</span> dedicated to SQuAD 2.0 adversarial null scoring.</em></p>
+<h3>4.2 Mathematical Span Formulation</h3>
+<h4>4.2.1 Input Formatting</h4>
+<p>Given question tokens <span class="math-inline">$Q = (q_1, \dots, q_m)$</span> and context tokens <span class="math-inline">$C = (c_1, \dots, c_n)$</span>, the sequence is structured as:</p>
+<div class="math-block">$$\displaystyle \mathbf{X} = [\text{CLS}], q_1, \dots, q_m, [\text{SEP}], c_1, \dots, c_n, [\text{SEP}]$$</div>
+
+<p>Segment embeddings assign <span class="math-inline">$0$</span> to all tokens up to the first <span class="math-inline">$[\text{SEP}]$</span>, and <span class="math-inline">$1$</span> to the context tokens.</p>
+<h4>4.2.2 Logit Computation</h4>
+<p>BERT outputs contextual hidden vectors <span class="math-inline">$\mathbf{h}_k \in \mathbb{R}^{768}$</span> for each position <span class="math-inline">$k$</span>. A linear classification layer with trainable weights <span class="math-inline">$\mathbf{w}_s, \mathbf{w}_e \in \mathbb{R}^{768}$</span> computes start and end logits:</p>
+<div class="math-block">$$\displaystyle s_k = \mathbf{w}_s^\top \mathbf{h}_k \quad (\text{Start Logit})$$</div>
+<div class="math-block">$$\displaystyle e_k = \mathbf{w}_e^\top \mathbf{h}_k \quad (\text{End Logit})$$</div>
+
+<h4>4.2.3 Span Candidate Selection</h4>
+<p>The system filters candidate spans <span class="math-inline">$(i, j)$</span> such that:<br />
+1. <span class="math-inline">$i \le j$</span> (the answer end must follow or equal the answer start).<br />
+2. <span class="math-inline">$j - i + 1 \le L_{\max}$</span> (constrained to <span class="math-inline">$L_{\max} = 30$</span> tokens).<br />
+3. Both <span class="math-inline">$i$</span> and <span class="math-inline">$j$</span> reside within the context passage (excluding question and special tokens).</p>
+<p>The span score is defined as:</p>
+<div class="math-block">$$\displaystyle S_{(i, j)} = s_i + e_j$$</div>
+
+<h4>4.2.4 Unanswerable Detection (Null Thresholding)</h4>
+<p>In SQuAD 2.0, unanswerable questions are supervised during fine-tuning with the <span class="math-inline">$[\text{CLS}]$</span> token (position 0) as the target. The null score is computed as:</p>
+<div class="math-block">$$\displaystyle S_{\text{null}} = s_0 + e_0$$</div>
+
+<p>The difference margin is evaluated:</p>
+<div class="math-block">$$\displaystyle \Delta = \max_{(i, j)} S_{(i, j)} - S_{\text{null}}$$</div>
+
+<p>If <span class="math-inline">$\Delta &lt; \tau$</span> (where <span class="math-inline">$\tau = -1.0$</span> is the calibrated null threshold), the model concludes that the passage contains insufficient evidence and outputs:</p>
+<div class="math-block">$$\displaystyle \text{Answer} = \text{"No answer found in the provided passage."}$$</div>
+
+<h4>4.2.5 Lossless Character Slicing</h4>
+<p>To avoid WordPiece detokenization artifacts (such as missing spaces or mangled punctuation), the Hugging Face fast Rust tokenizer generates an <code>offset_mapping</code> tensor containing the exact character boundaries <span class="math-inline">$(c_{\text{start}}, c_{\text{end}})$</span> in the raw input string. Slicing <code>context[c_start:c_end]</code> guarantees verbatim text recovery with original formatting intact.</p>
+<hr />
+<h2>5. Experimental Evaluation and Results</h2>
+<p>The evaluation pipeline was executed on a balanced sample of the SQuAD 2.0 development set using an NVIDIA RTX 3050 Laptop GPU.</p>
+<h3>5.1 Metrics</h3>
+<ul>
+<li><strong>Exact Match (EM):</strong> Binary metric (1 or 0). After lowercasing, stripping punctuation, and removing English articles ('a', 'an', 'the'), the prediction must match the ground truth identically.</li>
+<li><strong>Token-Level F1 Score:</strong> Harmonic mean of precision and recall over word tokens:<br />
+<br />
+<div class="math-block">$$\displaystyle \text{Precision} = \frac{|\text{Tokens}_{\text{pred}} \cap \text{Tokens}_{\text{gold}}|}{|\text{Tokens}_{\text{pred}}|}, \quad \text{Recall} = \frac{|\text{Tokens}_{\text{pred}} \cap \text{Tokens}_{\text{gold}}|}{|\text{Tokens}_{\text{gold}}|}$$</div></li>
+</ul>
+<div class="math-block">$$\displaystyle \text{F1} = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$</div>
+
+<h3>5.2 Benchmark Results Table</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Category</th>
+<th style="text-align: center;">Sample Count</th>
+<th style="text-align: center;">Exact Match (EM)</th>
+<th style="text-align: center;">F1 Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Overall Dataset</strong></td>
+<td style="text-align: center;"><strong>100</strong></td>
+<td style="text-align: center;"><strong>64.00%</strong></td>
+<td style="text-align: center;"><strong>69.23%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Answerable Questions (Has-Ans)</strong></td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">54.00%</td>
+<td style="text-align: center;">64.46%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Unanswerable Questions (No-Ans)</strong></td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">74.00%</td>
+<td style="text-align: center;">74.00%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Average Inference Latency</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>32.85 ms / query</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>5.3 Error Analysis</h3>
+<ol>
+<li><strong>Span Boundary Sensitivity:</strong> Several answerable errors obtained <span class="math-inline">$\text{EM} = 0\%$</span> but <span class="math-inline">$\text{F1} &gt; 80\%$</span>. For example, when asked for the EU judicial body, the model extracted <em>"Court of Justice of the European Union"</em> while the human annotator wrote <em>"the Court of Justice of the European Union (CJEU)"</em>.</li>
+<li><strong>Conservative Null Rejection:</strong> With <span class="math-inline">$\tau = -1.0$</span>, the model rejected 74% of unanswerable questions successfully. Adjusting <span class="math-inline">$\tau$</span> higher increases precision at the expense of recall on borderline answerable questions.</li>
+</ol>
+<hr />
+<h2>6. Graphical User Interface (GUI) Design</h2>
+<p>The user interface is implemented in Streamlit (<code>app.py</code>), styled with Google's Material You (Material Design 3) design system.</p>
+<p><img alt="Figure 3: Streamlit Web Application Interface" src="screenshots/02_answer_extracted_apollo.png" /><br />
+<em>Figure 3: Streamlit Web GUI (Material You design system) executing extractive inference on an Apollo 11 historical passage. The verbatim answer ("Eagle") is surfaced with 99.4% confidence and illuminated directly inside the source document.</em></p>
+<p><img alt="Figure 4: Adversarial Query Rejection" src="screenshots/03_adversarial_rejection_eiffel.png" /><br />
+<em>Figure 4: Streamlit Web GUI rejecting an adversarial trick question lacking supporting evidence in the text ("How many kilograms of gold were used to paint the Eiffel Tower?"). SQuAD 2.0 null scoring triggers a high-certainty unanswerable rejection card with zero generative hallucination.</em></p>
+<p><img alt="Figure 5: Model Diagnostics and Token Offsets" src="screenshots/04_diagnostics_expanded.png" /><br />
+<em>Figure 5: Collapsible viva defense diagnostics panel exposing exact character start and end indices (offsets 111-116), logit score margins, and raw prediction JSON metadata for auditable extraction provenance.</em></p>
+<p><img alt="Figure 6: Model Architecture &amp; Benchmark Performance Dashboard" src="screenshots/05_architecture_benchmark.png" /><br />
+<em>Figure 6: Empirical evaluation benchmark dashboard integrated into Tab 2 of the Streamlit application, displaying Exact Match (64.00%), F1 score (69.23%), and RTX 3050 GPU latency (32.85 ms).</em></p>
+<h3>6.1 GUI Features</h3>
+<ol>
+<li><strong>Passage Input &amp; Word Counter:</strong> Large text area displaying real-time character and word metrics.</li>
+<li><strong>Preset Selector:</strong> One-click dropdown loading curated scenarios (Apollo 11, Photosynthesis, Alan Turing, Eiffel Tower adversarial trick, Commercial Contract clause).</li>
+<li><strong>In-Passage Visual Highlighter:</strong> Highlights the exact extracted answer in yellow directly inside the rendered passage.</li>
+<li><strong>Metrics Dashboard:</strong> Displays Extraction Status, Calibrated Confidence %, Logit Margin (<span class="math-inline">$\Delta$</span>), and Latency in milliseconds.</li>
+<li><strong>Sidebar Sensitivity Slider:</strong> Allows dynamic adjustment of the null threshold <span class="math-inline">$\tau$</span> during live demonstrations.</li>
+<li><strong>Resource Caching:</strong> Employs <code>@st.cache_resource</code> to load the BERT checkpoint into GPU VRAM once, guaranteeing sub-50ms subsequent queries.</li>
+<li><strong>Demonstration Video:</strong> A complete walkthrough of the working application is available at: <a href="https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing">https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing</a></li>
+</ol>
+<hr />
+<h2>7. Conclusion and Future Work</h2>
+<h3>7.1 Conclusion</h3>
+<p>Project 12 has been successfully completed. The extractive QA pipeline provides:<br />
+- Verifiable, hallucination-free answers grounded strictly in user documents.<br />
+- Effective rejection of unanswerable and adversarial queries via SQuAD 2.0 null scoring.<br />
+- Real-time performance (~30 ms/query) on laptop hardware.<br />
+- A functional, polished web application satisfying all college capstone guidelines.</p>
+<h3>7.2 Future Enhancements</h3>
+<ol>
+<li><strong>Retrieval-Augmented Generation (RAG):</strong> Integrate a dense vector retriever (e.g., FAISS with BGE-embeddings) to scale from single passages to multi-document corporate corpora.</li>
+<li><strong>Model Quantization:</strong> Quantize weights to INT8 using ONNX Runtime or TensorRT to reduce memory consumption below 200 MB.</li>
+<li><strong>Multilingual Adaptation:</strong> Upgrade the encoder to <code>xlm-roberta-base</code> to support multilingual extractive QA across Indian vernacular languages.</li>
+</ol>
+<hr />
+<h2>8. References</h2>
+<p>[1] Devlin, J., Chang, M. W., Lee, K., &amp; Toutanova, K. (2018). "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." arXiv:1810.04805.<br />
+[2] Rajpurkar, P., Jia, R., &amp; Liang, P. (2018). "Know What You Don't Know: Unanswerable Questions for SQuAD." In Proceedings of ACL 2018.<br />
+[3] Vaswani, A., Shazeer, N., Parmar, N., et al. (2017). "Attention Is All You Need." In Advances in Neural Information Processing Systems (NeurIPS 2017).<br />
+[4] Wolf, T., Debut, L., Sanh, V., et al. (2020). "Transformers: State-of-the-Art Natural Language Processing." In Proceedings of EMNLP 2020.<br />
+[5] Streamlit Documentation (2026). "Streamlit API Reference &amp; Caching." https://docs.streamlit.io  </p>
+<hr />
+<h2>Appendix: Viva Voce Defense Questions &amp; Answers</h2>
+<p><strong>Q1: What is the difference between Extractive and Abstractive Question Answering?</strong><br />
+<em>Answer:</em> Extractive QA selects a contiguous substring directly from the source text by predicting start and end token indices, guaranteeing factual accuracy. Abstractive QA generates a novel paraphrased response using a sequence-to-sequence model (like T5 or GPT), which introduces risks of hallucination.</p>
+<p><strong>Q2: What was the main motivation for creating SQuAD 2.0?</strong><br />
+<em>Answer:</em> SQuAD 1.1 only contained answerable questions, causing models to blindly select whatever text had the highest word overlap even when questions made no sense. SQuAD 2.0 introduced over 50,000 adversarial unanswerable questions to train models to know when evidence is missing.</p>
+<p><strong>Q3: How does the model mathematically identify an unanswerable question?</strong><br />
+<em>Answer:</em> During fine-tuning, unanswerable questions are trained with start and end indices pointing to the special token <code>[CLS]</code> (index 0). At inference time, the model computes the null score <span class="math-inline">$S_{\text{null}} = s_0 + e_0$</span>. If the best passage span score fails to exceed <span class="math-inline">$S_{\text{null}}$</span> by threshold <span class="math-inline">$\tau$</span>, the model flags the question as unanswerable.</p>
+<p><strong>Q4: How are subword tokens mapped back to the original passage characters?</strong><br />
+<em>Answer:</em> WordPiece tokenization can split words into fragments (e.g., "playing" into "play" and "##ing"). The fast tokenizer generates an <code>offset_mapping</code> array storing the original <code>(start_char, end_char)</code> offsets in the raw string. We slice the original string directly using these offsets to preserve whitespace and casing verbatim.</p>
+<p><strong>Q5: Why is <code>@st.cache_resource</code> critical for Streamlit deployment?</strong><br />
+<em>Answer:</em> By default, Streamlit re-executes the entire Python script on every user interaction or button click. Loading BERT’s 110M weights into GPU memory takes 2–3 seconds. <code>@st.cache_resource</code> caches the loaded model in memory, allowing subsequent clicks to run inference instantly in ~30 ms.</p>
+</body>
+</html>

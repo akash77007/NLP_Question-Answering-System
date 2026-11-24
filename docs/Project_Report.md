@@ -100,20 +100,8 @@ Analysis of the leading interrogative words revealed the following distribution:
 5. **Where:** 5.4% (Location, place)
 6. **Why / Which:** 2.9% (Causal & selection)
 
-```
-+-----------------------------------------------------------------------------------------+
-|                                📷 FIGURE 1 PLACEHOLDER                                   |
-|               SQuAD 2.0 Exploratory Data Analysis Dashboard (4-Panel Chart)             |
-|                                                                                         |
-|       [ Insert image: data/squad_eda_plots.png from project repository here ]          |
-|                                                                                         |
-|  Panel A: Class Balance (Answerable 49.9% vs Unanswerable 50.1%)                        |
-|  Panel B: Passage Word Length Distribution (with 95th Percentile 220-word threshold)   |
-|  Panel C: Question Word Length Histogram (Median = 10 words)                           |
-|  Panel D: Top 7 Question Starter Types ("What", "Who", "How", "When", "Where")         |
-+-----------------------------------------------------------------------------------------+
-*Figure 1: Exploratory Data Analysis dashboard for SQuAD 2.0 validation split (n=11,873).*
-```
+![Figure 1: SQuAD 2.0 Exploratory Data Analysis Dashboard](../data/squad_eda_plots.png)
+*Figure 1: Exploratory Data Analysis dashboard for SQuAD 2.0 validation split (n=11,873). Panel A shows the 50/50 class balance; Panel B plots context word counts with the 95th percentile cutoff at 220 words; Panel C displays question length distributions; Panel D highlights interrogative starter frequencies.*
 
 ### 3.4 Text Preprocessing & Offset Mapping
 Unlike traditional NLP systems where text is normalized by removing stopwords, stemming, and stripping punctuation, BERT operates on full grammatical syntax:
@@ -133,17 +121,8 @@ The fast Rust tokenizer computes an `offset_mapping` tensor containing the start
 ### 4.1 Model Selection
 The system employs **`deepset/bert-base-cased-squad2`**, a 12-layer, 768-hidden dimension BERT-base Transformer model (110 million parameters) fine-tuned specifically on SQuAD 2.0. The cased model preserves capitalization, which is essential for identifying named entities.
 
-```
-+-----------------------------------------------------------------------------------------+
-|                                📷 FIGURE 2 PLACEHOLDER                                   |
-|                BERT-base Extractive Question Answering Pipeline Architecture            |
-|                                                                                         |
-|       [ Insert Architecture Diagram / Flowchart: Question + Passage ➔                   |
-|         Tokenizer ➔ 12-Layer Transformer Encoder ➔ Start/End Classification Head ➔      |
-|         Span Logits + SQuAD 2.0 Null-Score Comparison ➔ Final Extracted Answer ]        |
-+-----------------------------------------------------------------------------------------+
-*Figure 2: Architectural pipeline of the BERT Extractive Question Answering Engine.*
-```
+![Figure 2: BERT Extractive Question Answering Architecture](screenshots/bert_qa_architecture.png)
+*Figure 2: End-to-end architecture of the BERT Extractive Question Answering Engine. The model encodes joint Question-Passage sequences via 12 Transformer layers, projecting output contextual embeddings $T_i$ into start logits $s_i$ and end logits $e_j$, with [CLS] representation $T_0$ dedicated to SQuAD 2.0 adversarial null scoring.*
 
 ### 4.2 Mathematical Span Formulation
 
@@ -211,34 +190,17 @@ The evaluation pipeline was executed on a balanced sample of the SQuAD 2.0 devel
 
 The user interface is implemented in Streamlit (`app.py`), styled with Google's Material You (Material Design 3) design system.
 
-```
-+-----------------------------------------------------------------------------------------+
-|                                📷 FIGURE 3 PLACEHOLDER                                   |
-|                Streamlit Web Application Interface (Answer Extraction Demo)             |
-|                                                                                         |
-|       [ Insert Screenshot of Streamlit GUI here showing:                                |
-|         - Context Passage text area                                                     |
-|         - Question input box                                                            |
-|         - Green Extracted Answer Span card: "5,500,000 km2 (2,100,000 sq mi)"           |
-|         - Illuminated in-passage highlight badge in the source text                     |
-|         - Metric cards: Status, Confidence (99.9%), Logit Margin, Latency (32ms) ]      |
-+-----------------------------------------------------------------------------------------+
-*Figure 3: Streamlit Web Graphical User Interface demonstrating real-time answer extraction and in-passage highlighting.*
-```
+![Figure 3: Streamlit Web Application Interface](screenshots/02_answer_extracted_apollo.png)
+*Figure 3: Streamlit Web GUI (Material You design system) executing extractive inference on an Apollo 11 historical passage. The verbatim answer ("Eagle") is surfaced with 99.4% confidence and illuminated directly inside the source document.*
 
-```
-+-----------------------------------------------------------------------------------------+
-|                                📷 FIGURE 4 PLACEHOLDER                                   |
-|             Adversarial Unanswerable Query Rejection in Streamlit GUI                   |
-|                                                                                         |
-|       [ Insert Screenshot of Streamlit GUI here showing:                                |
-|         - Context: Eiffel Tower article                                                 |
-|         - Question: "How many kilograms of gold were used to paint the Eiffel Tower?"   |
-|         - Red Unanswerable Card: "🚫 No Answer Found in Passage"                         |
-|         - Confidence: 100% certainty that the passage contains no evidence ]           |
-+-----------------------------------------------------------------------------------------+
-*Figure 4: Streamlit Web GUI rejecting an adversarial trick question lacking supporting evidence.*
-```
+![Figure 4: Adversarial Query Rejection](screenshots/03_adversarial_rejection_eiffel.png)
+*Figure 4: Streamlit Web GUI rejecting an adversarial trick question lacking supporting evidence in the text ("How many kilograms of gold were used to paint the Eiffel Tower?"). SQuAD 2.0 null scoring triggers a high-certainty unanswerable rejection card with zero generative hallucination.*
+
+![Figure 5: Model Diagnostics and Token Offsets](screenshots/04_diagnostics_expanded.png)
+*Figure 5: Collapsible viva defense diagnostics panel exposing exact character start and end indices (offsets 111-116), logit score margins, and raw prediction JSON metadata for auditable extraction provenance.*
+
+![Figure 6: Model Architecture & Benchmark Performance Dashboard](screenshots/05_architecture_benchmark.png)
+*Figure 6: Empirical evaluation benchmark dashboard integrated into Tab 2 of the Streamlit application, displaying Exact Match (64.00%), F1 score (69.23%), and RTX 3050 GPU latency (32.85 ms).*
 
 ### 6.1 GUI Features
 1. **Passage Input & Word Counter:** Large text area displaying real-time character and word metrics.
