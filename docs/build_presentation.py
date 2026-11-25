@@ -124,9 +124,9 @@ def create_presentation():
     p4 = tf1.add_paragraph()
     p4.text = (
         "Team Members (Group 10):\n"
-        "• Roll No: 2401201113          • Roll No: 2401201213\n"
-        "• Roll No: 2401201115          • Roll No: 2401201104\n"
-        "• Roll No: 2401201102          • Roll No: 2401201108 (Akash Sharma - Project Lead)\n\n"
+        "• Akash Sharma (Project Lead): 2401201108   • Khushi: 2401201102\n"
+        "• Aryan Sareen: 2401201104                  • Aman: 2401201115\n"
+        "• Vivek Sharma: 2401201213\n\n"
         "GitHub: https://github.com/akash77007/NLP_Question-Answering-System\n"
         "Demo Video: https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing\n"
         "Course: BCA (AI & Data Science) | Hardware: NVIDIA RTX 3050 Laptop GPU (CUDA 13.x)"

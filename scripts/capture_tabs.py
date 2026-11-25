@@ -59,15 +59,12 @@ def main():
             page = context.new_page()
 
             page.goto("http://localhost:8501")
-            page.wait_for_selector("textarea", timeout=25000)
-            time.sleep(3)
+            print("[*] Waiting for stTabs container...", flush=True)
+            page.wait_for_selector('[data-testid="stTabs"]', timeout=35000)
+            time.sleep(2)
 
-            # Try get_by_role("tab")
-            tabs = page.get_by_role("tab").all()
-            print(f"[*] Found {len(tabs)} tabs via get_by_role.", flush=True)
-            if not tabs:
-                tabs = page.locator('button[role="tab"]').all()
-                print(f"[*] Found {len(tabs)} tabs via button[role='tab'].", flush=True)
+            tabs = page.locator('[data-testid="stTabs"] button').all()
+            print(f"[*] Found {len(tabs)} tabs via stTabs button.", flush=True)
 
             if len(tabs) >= 2:
                 print("[*] Clicking Tab 2...", flush=True)

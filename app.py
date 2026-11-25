@@ -737,17 +737,17 @@ def main():
 
         st.markdown("#### 👥 Team Members (Group 10):")
         members = [
-            "2401201113",
-            "2401201115",
-            "2401201102",
-            "2401201213",
-            "2401201104",
-            "2401201108 (Akash Sharma - Project Lead)"
+            ("Akash Sharma", "2401201108", "Project Lead"),
+            ("Khushi", "2401201102", "Team Member"),
+            ("Aryan Sareen", "2401201104", "Team Member"),
+            ("Aman", "2401201115", "Team Member"),
+            ("Vivek Sharma", "2401201213", "Team Member")
         ]
         cols = st.columns(3)
-        for i, member in enumerate(members):
+        for i, (name, roll, role) in enumerate(members):
             with cols[i % 3]:
-                st.markdown(f"<div class='m3-team-pill'>👤 Roll No: {member}</div>", unsafe_allow_html=True)
+                lead_badge = " <span style='background:#0B57D0; color:white; padding:2px 6px; border-radius:10px; font-size:0.7rem;'>LEAD</span>" if role == "Project Lead" else ""
+                st.markdown(f"<div class='m3-team-pill'>👤 <b>{name}</b>{lead_badge}<br><span style='font-size:0.8rem; color:#444746;'>Roll No: {roll}</span></div>", unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("#### 🔗 Deliverable Links:")

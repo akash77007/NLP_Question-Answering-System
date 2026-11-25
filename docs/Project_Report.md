@@ -10,12 +10,11 @@
 **Project Demo Video:** [https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)  
 
 **Team Members (Group 10):**
-1. Roll No: 2401201113
-2. Roll No: 2401201115
-3. Roll No: 2401201102
-4. Roll No: 2401201213
-5. Roll No: 2401201104
-6. Roll No: 2401201108 (Akash Sharma - Project Lead)
+1. **Akash Sharma (Project Lead)** — Roll No: `2401201108`
+2. **Khushi** — Roll No: `2401201102`
+3. **Aryan Sareen** — Roll No: `2401201104`
+4. **Aman** — Roll No: `2401201115`
+5. **Vivek Sharma** — Roll No: `2401201213`
 
 ---
 

@@ -7,12 +7,11 @@
 **Live Demo Video:** [Google Drive Demo Video](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)  
 
 ### Team Members (Group 10):
-- `2401201113`
-- `2401201115`
-- `2401201102`
-- `2401201213`
-- `2401201104`
-- `2401201108` (Akash Sharma)
+1. **Akash Sharma (Project Lead)** — Roll No: `2401201108`
+2. **Khushi** — Roll No: `2401201102`
+3. **Aryan Sareen** — Roll No: `2401201104`
+4. **Aman** — Roll No: `2401201115`
+5. **Vivek Sharma** — Roll No: `2401201213`
 
 ---
 

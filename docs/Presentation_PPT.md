@@ -14,12 +14,11 @@
 - **GitHub Repository:** [https://github.com/akash77007/NLP_Question-Answering-System](https://github.com/akash77007/NLP_Question-Answering-System)
 - **Live Demo Video:** [Google Drive Demo Video](https://drive.google.com/file/d/1c_FlTJh2mWxDgKP-5dGBlNSZ4vWIuDO9/view?usp=sharing)
 - **Team Members (Group 10):**
-  - Roll No: 2401201113
-  - Roll No: 2401201115
-  - Roll No: 2401201102
-  - Roll No: 2401201213
-  - Roll No: 2401201104
-  - Roll No: 2401201108 (Akash Sharma)
+  - **Akash Sharma (Project Lead)** — Roll No: `2401201108`
+  - **Khushi** — Roll No: `2401201102`
+  - **Aryan Sareen** — Roll No: `2401201104`
+  - **Aman** — Roll No: `2401201115`
+  - **Vivek Sharma** — Roll No: `2401201213`
 - **Course & Department:** BCA (Artificial Intelligence & Data Science)
 
 > **Speaker Note:** *"Good morning respected evaluators. Today we present Project 12: An Extractive Question Answering System built using BERT and Stanford SQuAD 2.0, fully accelerated on an NVIDIA RTX 3050 GPU."*
